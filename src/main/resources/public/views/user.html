@@ -1,0 +1,101 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><span class="lead">User Details Form </span></div>
+    <div class="formcontainer">
+        <form ng-submit="submit()" name="regForm" class="form-horizontal">
+            <input type="hidden" ng-model="user.id" />
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-2 control-lable" for="uname">Name</label>
+                    <div class="col-md-7">
+                        <input type="text" ng-model="user.username" id="uname" class="username form-control input-sm" placeholder="Enter your name" required ng-minlength="3"/>
+                        <div class="has-error" ng-show="regForm.$dirty">
+                            <span ng-show="regForm.uname.$error.required">This is a required field</span>
+                            <span ng-show="regForm.uname.$error.minlength">Minimum length required is 3</span>
+                            <span ng-show="regForm.uname.$invalid">This field is invalid </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-2 control-lable" for="address">Address</label>
+                    <div class="col-md-7">
+                        <input type="text" ng-model="user.address" id="address" class="form-control input-sm" placeholder="Enter your Address."/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-2 control-lable" for="email">Email</label>
+                    <div class="col-md-7">
+                        <input type="email" ng-model="user.email" id="email" class="email form-control input-sm" placeholder="Enter your Email" required/>
+                        <div class="has-error" ng-show="regForm.$dirty">
+                            <span ng-show="regForm.email.$error.required">This is a required field</span>
+                            <span ng-show="regForm.email.$invalid">This field is invalid </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-actions floatRight">                      
+                        <input type="submit"  value="{{!user.id ? 'Add' : 'Save'}}" class="btn btn-success" ng-disabled="regForm.$invalid">
+                    <button type="button"  ng-click="reset()" class="btn btn-success" ng-disabled="regForm.$pristine"><i class="glyphicon glyphicon-refresh"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div ng-if="users"  class="panel-heading"><span class="lead">List of Users </span></div>
+        
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID.</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th width="20%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="u in users">
+                        <td><span ng-bind="u.id"></span></td>
+                        <td><span ng-bind="u.username"></span></td>
+                        <td><span ng-bind="u.address"></span></td>
+                        <td><span ng-bind="u.email"></span></td>
+                        <td style="width: 110px ! important;padding: 2px;">
+                            <button style="margin-left:71px;" type="button" ng-click="edit(u.id)" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i></button>  
+                            <button type="button" ng-click="remove(u.id)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- pagination -->
+
+           <!--  <ul ng-if="usCtrl.pager.totalItems" class="pagination">
+                <li ng-class="{disabled:usCtrl.pager.currentPage === 1}">
+                    <a ng-click="usCtrl.setPage(1)">First</a>
+                </li>
+                <li ng-class="{disabled:usCtrl.pager.currentPage === 1}">
+                    <a ng-click="usCtrl.setPage(usCtrl.pager.currentPage - 1)">Previous</a>
+                </li>
+                <li ng-repeat="page in usCtrl.pager.pages" ng-class="{active:usCtrl.pager.currentPage === page}">
+                    <a ng-click="usCtrl.setPage(page)">{{page}}</a>
+                </li>               
+                <li ng-class="{disabled:usCtrl.pager.currentPage === usCtrl.pager.totalPages}">
+                    <a ng-click="usCtrl.setPage(usCtrl.pager.currentPage + 1)">Next</a>
+                </li>
+                <li ng-class="{disabled:usCtrl.pager.currentPage === usCtrl.pager.totalPages}">
+                    <a ng-click="usCtrl.setPage(usCtrl.pager.totalPages)">Last</a>
+                </li>
+            </ul> -->
+        </div>
+</div>

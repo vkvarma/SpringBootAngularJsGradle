@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><span class="lead">Candidate login</span></div> 
+    <div class="formcontainer">
+        <form ng-submit="submit()" name="loginForm" class="form-horizontal">
+            <input type="hidden" ng-model="login.sessionId" />
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-2 control-lable" for="uname">Username</label>
+                    <div class="col-md-7">
+                        <input type="text" ng-model="login.username" id="uname" class="username form-control input-sm" placeholder="Enter username" required ng-minlength="3"/>
+                        <div class="has-error" ng-show="loginForm.$dirty">
+                            <span ng-show="loginForm.uname.$error.required">This is a required field</span>
+                            <span ng-show="loginForm.uname.$error.minlength">Minimum length required is 3</span>
+                            <span ng-show="loginForm.uname.$invalid">This field is invalid </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-2 control-lable" for="upass">Password</label>
+                    <div class="col-md-7">
+                        <input type="text" ng-model="login.password" id="upass" class="form-control input-sm" placeholder="Enter password"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-actions floatRight">                      
+                    <input  type="submit"  value="Sign In"     class="btn btn-success" ng-disabled="loginForm.$invalid">
+                    <button type="button"  ng-click="reset()"  class="btn btn-success" ng-disabled="loginForm.$pristine"><i class="glyphicon glyphicon-refresh"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

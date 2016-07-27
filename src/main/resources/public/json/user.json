@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1", 
+        "username": "vkvarma", 
+        "address": "NV", 
+        "email": "vkvarma@xavient.com"
+    },
+    {
+        "id": "2", 
+        "username": "sbucha", 
+        "address": "PA", 
+        "email": "sbucha@xavient.com"
+    },
+    {
+        "id": "3", 
+        "username": "nkumar", 
+        "address": "OR", 
+        "email": "nkumar@xavient.com"
+    },
+    {
+        "id": "4", 
+        "username": "vinody", 
+        "address": "NY", 
+        "email": "vinody@xavient.com"
+    },
+    {
+        "id": "5", 
+        "username": "shurabhr", 
+        "address": "CA", 
+        "email": "srastogi@xavient.com"
+    }
+]

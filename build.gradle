@@ -1,0 +1,184 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "maven"
+apply plugin: "jacoco"
+apply plugin: 'war'
+apply plugin: 'io.github.robwin.jgitflow'
+
+println "Building " + group + " : " + project.name + " : " + version
+
+buildscript {
+	ext {
+		springBootGradleVersion = '1.3.6.RELEASE'
+        springCloudVersion      = '1.0.2.RELEASE'
+        springFrameworkVersion  = '4.2.5.RELEASE'
+	}
+	repositories {
+		//mavenLocal()
+		mavenCentral()
+        //maven { url "https://maven.teamccp.com/content/repositories/" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootGradleVersion}")
+		classpath("io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE")
+		classpath("org.ajoberstar:grgit:1.1.0")
+		classpath("io.github.robwin:jgitflow-gradle-plugin:0.3.2")
+	}
+}
+
+ext {
+    releaseVersion = version
+    newVersion     = version    
+    /*git            = org.ajoberstar.grgit.Grgit.open(file('.'))
+    def head       = git.head()
+    branch         = git.branch.current.name
+    revision       = head.id
+    revAbbr        = head.abbreviatedId
+    date           = head.date
+    shortMessage   = head.shortMessage
+    authorName     = head.author.name
+    authorEmail    = head.author.email*/
+}
+
+group       = "com.vproj.demo"
+description = """Demo Application of Angular with Spring Boot and Gradle"""
+
+war {
+	baseName = project.name
+	version  = version
+	manifest {
+        attributes(
+            "Version"                   : version,
+            "Build-Time"                : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")           
+        )
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	//mavenLocal()
+	mavenCentral()
+	//maven { url "https://maven.teamccp.com/content/repositories/" }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
+
+jacoco {
+    toolVersion = "0.7.5+"
+    reportsDir  = file("$buildDir/customJacocoReportDir")
+}
+
+test {
+    jacoco {
+        append          = false
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+        classDumpFile   = file("$buildDir/jacoco/classpathdumps")
+    }
+}
+
+processResources {
+    filesMatching("**/application.properties") {
+        expand project.properties
+    }
+}
+
+springBoot {
+    mainClass  = "com.vproj.demo.main.Application"
+    executable = true
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR3"
+    }
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+    compile('com.google.code.gson:gson:2.5')
+    compile('commons-httpclient:commons-httpclient:3.1')
+    compile('javax.persistence:persistence-api:1.0.2')
+    compile('javax.ws.rs:jsr311-api:1.1.1')
+    compile('joda-time:joda-time:2.9.3')
+    compile('org.apache.commons:commons-lang3:3.4')
+    compile('org.apache.httpcomponents:httpclient:4.4.1')    
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
+    compile('org.mongodb:mongo-java-driver:3.2.2')
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')    
+    compile('org.springframework.data:spring-data-mongodb:1.8.0.RELEASE')
+    compile('org.springframework.session:spring-session')
+    compile('org.springframework.boot:spring-boot-starter-validation')
+    compile('org.springframework.security.oauth:spring-security-oauth:2.0.9.RELEASE')
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+/*
+initJGitflow {
+}
+
+task prepareReleaseVersion << {
+    releaseVersion = version.replace('-SNAPSHOT', '')
+    checkThatNoDependencyIsASnapshot();
+    println "Release Version : $releaseVersion from current Version : $version";
+}
+
+task prepareNewVersion << {
+    String[] vComponents = releaseVersion.split("\\.");
+    int minorV = Integer.parseInt(vComponents[1]);
+    minorV++;
+    newVersion = vComponents[0] + ".$minorV." + vComponents[2];
+    if(! newVersion.endsWith("-SNAPSHOT")){
+        newVersion =  newVersion + "-SNAPSHOT";
+    }
+    println "newVersion : $newVersion - from releaseVersion : $releaseVersion";     
+}
+
+releaseStart.dependsOn initJGitflow
+releaseStart.dependsOn prepareReleaseVersion
+
+releaseFinish.dependsOn initJGitflow
+releaseFinish.dependsOn prepareNewVersion
+
+releaseStart.dependsOn prepareReleaseVersion
+releaseFinish.dependsOn prepareNewVersion
+
+task listBuildScriptJars << {
+    println project.buildscript.configurations.classpath.asPath
+}
+
+private void checkThatNoDependencyIsASnapshot() {
+    def snapshotDependencies = [] as Set
+    project.allprojects.each { project ->
+        project.configurations.each { configuration ->
+            configuration.allDependencies.each { Dependency dependency ->
+                if (io.github.robwin.jgitflow.tasks.helper.ArtifactHelper.isSnapshot(dependency.version)) {
+                    snapshotDependencies.add("${dependency.group}:${dependency.name}:${dependency.version}")
+                }
+            }
+        }
+    }
+    if (!snapshotDependencies.isEmpty()) {
+        throw new GradleException("Cannot start a release due to snapshot dependencies: ${snapshotDependencies}")
+    }
+}
+
+eclipse {
+    classpath {
+         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}*/

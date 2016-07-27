@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" ng-app="xrs">
+    <head>
+        <meta charset="utf-8">
+        <title>Spring Boot with Angular and Gradle</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/app.css">
+
+        <!-- Vendor Libs -->
+        
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+
+        <!-- UI Libs -->
+
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+               
+        <!-- App Libs -->
+
+        <script src="js/app/app.js"></script>
+        <script src="js/controller/user_controller.js"></script>       
+        <script src="js/service/user_service.js"></script>
+        <script src="js/controller/login_controller.js"></script>       
+        <script src="js/service/login_service.js"></script>
+        
+    </head>
+
+   <body class="container">        
+		    <div class="generic-container">
+		        <div class="panel panel-default">
+		          <h3 style="margin-left:10px">User System</h3>
+		            <nav style="margin-left: 10px;margin-right: 12px;" class="navbar navbar-default row">
+		              <ul class="nav navbar-nav">
+		                  <li>
+		                    <a style="text-decoration:none;float:left" href="#user">User</a>
+		                    <a style="text-decoration:none;float:left" href="#login">Login</a>
+		                  </li>
+		              </ul>
+				        </nav> 
+				    </div>
+				    <div ng-view></div> 
+				</div>
+    </body>
+</html>
