@@ -10,8 +10,8 @@ apply plugin: 'io.github.robwin.jgitflow'
 
 println "Building " + group + " : " + project.name + " : " + version
 
-buildscript {
-	ext {
+buildscript	{
+	ext	{
 		springBootGradleVersion	=	'1.3.6.RELEASE'
 		springCloudVersion		=	'1.0.2.RELEASE'
 		springFrameworkVersion	=	'4.2.5.RELEASE'
@@ -49,7 +49,7 @@ description			=	"""Demo Application of Angular with Spring Boot and Gradle"""
 war {
 	baseName		=	project.name
 	version			=	version
-	manifest {
+	manifest	{
 		attributes(
 			"Version"					:	version,
 			"Build-Time"				:	new	Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
@@ -58,7 +58,7 @@ war {
 			"SCM-Revision-Date"			:	date,
 			"SCM-Branch"				:	branch,
 			"SCM-Author-Name"			:	authorName,
-			"SCM-Author-Email"			:	authorEmail       
+			"SCM-Author-Email"			:	authorEmail
 		)
 	}
 }
