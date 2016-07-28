@@ -12,14 +12,14 @@ println "Building " + group + " : " + project.name + " : " + version
 
 buildscript {
 	ext {
-		springBootGradleVersion = '1.3.6.RELEASE'
-        springCloudVersion      = '1.0.2.RELEASE'
-        springFrameworkVersion  = '4.2.5.RELEASE'
+		springBootGradleVersion	=	'1.3.6.RELEASE'
+		springCloudVersion		=	'1.0.2.RELEASE'
+		springFrameworkVersion	=	'4.2.5.RELEASE'
 	}
 	repositories {
 		//mavenLocal()
 		mavenCentral()
-        //maven { url "https://maven.teamccp.com/content/repositories/" }
+		//maven { url "https://maven.teamccp.com/content/repositories/" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootGradleVersion}")
@@ -30,37 +30,37 @@ buildscript {
 }
 
 ext {
-    releaseVersion = version
-    newVersion     = version    
-    git            = org.ajoberstar.grgit.Grgit.open(file('.'))
-    def head       = git.head()
-    branch         = git.branch.current.name
-    revision       = head.id
-    revAbbr        = head.abbreviatedId
-    date           = head.date
-    shortMessage   = head.shortMessage
-    authorName     = head.author.name
-    authorEmail    = head.author.email
+	releaseVersion	=	version
+	newVersion		=	version
+	git				=	org.ajoberstar.grgit.Grgit.open(file('.'))
+	def	head		=	git.head()
+	branch			=	git.branch.current.name
+	revision		=	head.id
+	revAbbr			=	head.abbreviatedId
+	date			=	head.date
+	shortMessage	=	head.shortMessage
+	authorName		=	head.author.name
+	authorEmail		=	head.author.email
 }
 
-group       	   = "com.vproj.demo"
-description        = """Demo Application of Angular with Spring Boot and Gradle"""
+group				=	"com.vproj.demo"
+description			=	"""Demo Application of Angular with Spring Boot and Gradle"""
 
 war {
-	baseName = project.name
-	version  = version
+	baseName		=	project.name
+	version			=	version
 	manifest {
-        attributes(
-            "Version"                   : version,
-            "Build-Time"                : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-            "SCM-Revision" 				: revision,
-			"SCM-Revision-Abbreviated" 	: revAbbr,
-			"SCM-Revision-Date" 		: date,
-			"SCM-Branch" 				: branch,
-			"SCM-Author-Name" 			: authorName,
-			"SCM-Author-Email" 			: authorEmail       
-        )
-    }
+		attributes(
+			"Version"					:	version,
+			"Build-Time"				:	new	Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+			"SCM-Revision"				:	revision,
+			"SCM-Revision-Abbreviated"	:	revAbbr,
+			"SCM-Revision-Date"			:	date,
+			"SCM-Branch"				:	branch,
+			"SCM-Author-Name"			:	authorName,
+			"SCM-Author-Email"			:	authorEmail       
+		)
+	}
 }
 
 sourceCompatibility = 1.8
