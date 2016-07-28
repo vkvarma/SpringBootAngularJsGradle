@@ -1,37 +1,34 @@
-'use strict';
+"use strict";
 
 /**
  *
  * @author vivek krishna varma
  */
-
-var userService = angular.module('userService', ['ngResource']);
-
-userService.factory('UserService', ['$resource', function($resource){
-    return $resource('/user/:id', {id:'@id'}, {
+	
+App.factory("UserService", ["$resource", function($resource) {
+    return $resource("/user/:id", {id:"@id"}, {
     	 get    : {  
-	            method  : 'GET'
+    		 method  : "GET"
 	     },
 	     query  : {  
-	            method  : 'GET',
-	            isArray : true
+	         method  : "GET",
+	         isArray : true
 	     },
 	     save   : {  
-	            method  : 'POST'
+	         method  : "POST"
 	     },                
 	     delete : {  
-	            method  : 'DELETE'
+	         method  : "DELETE"
 	     },
 	     update : {  
-	            method  : 'PUT'
+	         method  : "PUT"
 	     }
     },
     {
         stripTrailingSlashes: false
     }
    );
-  }
-]);
+}]);
 
 /*App.factory('UserService', ['$resource', function($resource) { 
         
@@ -111,6 +108,3 @@ userService.factory('UserService', ['$resource', function($resource){
 //            }
 //
 //        };
-
-
-

@@ -1,13 +1,11 @@
-'use strict';
+"use strict";
 
 /**
  *
  * @author vivek krishna varma
  */
 
-var welcomeController = angular.module('welcomeController', []);
-
-welcomeController.controller('WelcomeController', ['$scope', 'WelcomeService',function($scope, WelcomeService) {
+App.controller("WelcomeController", ["$scope","WelcomeService",	function($scope, WelcomeService) {
     $scope.menuItems = WelcomeService.query();
   }
 ]);

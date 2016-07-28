@@ -1,16 +1,14 @@
-'use strict';
+"use strict";
 
 /**
  *
  * @author vivek krishna varma
  */
 
-var welcomeService = angular.module('welcomeService', ['ngResource']);
-
-welcomeService.factory('WelcomeService', ['$resource', function($resource){
-		    return $resource('/welcome', {}, {
+App.factory("WelcomeService", ["$resource", function($resource)	{
+		    return $resource("/welcome", {}, {
 		    	query  : {  
-		            method  : 'GET',
+		            method  : "GET",
 		            isArray : true
 		    	}
 		    },
@@ -20,23 +18,6 @@ welcomeService.factory('WelcomeService', ['$resource', function($resource){
 		    );
 	  }
 ]);
-
-
-
-/*App.factory('WelcomeService', ['$resource', function ($resource) {  
-        
-    return $resource('http://localhost:8080/XRS/menuitems/', {}, {
-            query  : {  
-                  method  : 'GET',
-                  isArray : true
-            }
-        }, 
-        {
-            stripTrailingSlashes: false
-        }
-    );
-}]);
-*/
 
 //App.factory('WelcomeService', ['$http', '$q', function ($http, $q) {
 //    return {

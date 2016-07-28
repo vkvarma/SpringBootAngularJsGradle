@@ -1,36 +1,32 @@
-'use strict';
+"use strict";
 
 /**
  *
  * @author vivek krishna varma
  */
 
-var App = angular.module('xrs',[
-    'ngResource',
-	'ngRoute',
-	'userController',
-	'userService',
-	'loginController',
-	'loginService'
+var App = angular.module("xrs",[
+    "ngResource",
+	"ngRoute"
 ]);
 
-App.config(['$routeProvider', function($routeProvider) {
+App.config(["$routeProvider", function($routeProvider) {
      
     $routeProvider
      .when("/user/", {
-        templateUrl: "../../views/user.html",
-        controller : "UserController"
+        templateUrl	: "../../views/user.html",
+        controller	: "UserController"
     }).when('/user/:id', {
-		templateUrl : '../../views/user.html',
-		controller : 'UserController' 
-    }).when("/login/", {
-       templateUrl: "../../views/login.html",
-       controller : "LoginController"
+		templateUrl	: "../../views/user.html",
+		controller	: "UserController" 
+    }).when("/login/",	{
+       templateUrl	: "../../views/login.html",
+       controller	: "LoginController"
     }).when("/login/:username/:password", {
-        templateUrl: "../../views/login.html",
-        controller : "LoginController"     
+        templateUrl	: "../../views/login.html",
+        controller	: "LoginController"     
     }).otherwise({
-        redirectTo : "/welcome"
+        redirectTo	: "/"
     });
     
 }]);
