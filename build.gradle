@@ -32,7 +32,7 @@ buildscript {
 ext {
     releaseVersion = version
     newVersion     = version    
-    /*git            = org.ajoberstar.grgit.Grgit.open(file('.'))
+    git            = org.ajoberstar.grgit.Grgit.open(file('.'))
     def head       = git.head()
     branch         = git.branch.current.name
     revision       = head.id
@@ -40,7 +40,7 @@ ext {
     date           = head.date
     shortMessage   = head.shortMessage
     authorName     = head.author.name
-    authorEmail    = head.author.email*/
+    authorEmail    = head.author.email
 }
 
 group       = "com.vproj.demo"
@@ -126,7 +126,7 @@ dependencies {
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
-/*
+
 initJGitflow {
 }
 
@@ -135,6 +135,9 @@ task prepareReleaseVersion << {
     checkThatNoDependencyIsASnapshot();
     println "Release Version : $releaseVersion from current Version : $version";
 }
+
+releaseStart.dependsOn initJGitflow
+releaseStart.dependsOn prepareReleaseVersion
 
 task prepareNewVersion << {
     String[] vComponents = releaseVersion.split("\\.");
@@ -147,13 +150,7 @@ task prepareNewVersion << {
     println "newVersion : $newVersion - from releaseVersion : $releaseVersion";     
 }
 
-releaseStart.dependsOn initJGitflow
-releaseStart.dependsOn prepareReleaseVersion
-
 releaseFinish.dependsOn initJGitflow
-releaseFinish.dependsOn prepareNewVersion
-
-releaseStart.dependsOn prepareReleaseVersion
 releaseFinish.dependsOn prepareNewVersion
 
 task listBuildScriptJars << {
@@ -181,4 +178,4 @@ eclipse {
          containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
          containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
     }
-}*/
+}
