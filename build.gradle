@@ -43,8 +43,8 @@ ext {
     authorEmail    = head.author.email
 }
 
-group       = "com.vproj.demo"
-description = """Demo Application of Angular with Spring Boot and Gradle"""
+group       	   = "com.vproj.demo"
+description        = """Demo Application of Angular with Spring Boot and Gradle"""
 
 war {
 	baseName = project.name
@@ -52,7 +52,13 @@ war {
 	manifest {
         attributes(
             "Version"                   : version,
-            "Build-Time"                : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")           
+            "Build-Time"                : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            "SCM-Revision" 				: revision,
+			"SCM-Revision-Abbreviated" 	: revAbbr,
+			"SCM-Revision-Date" 		: date,
+			"SCM-Branch" 				: branch,
+			"SCM-Author-Name" 			: authorName,
+			"SCM-Author-Email" 			: authorEmail       
         )
     }
 }
