@@ -1,2 +1,2 @@
 # SpringBootAngularJsGradle
-Author : Vivek Krishna Varma 1
+Author : Vivek Krishna Varma
