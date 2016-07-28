@@ -1,4 +1,4 @@
-/node_module/
+node_module/
 .classpath
 .gradle/
 .project
@@ -8,3 +8,4 @@
 /gradle/
 /build/
 *~
+/node_modules/
