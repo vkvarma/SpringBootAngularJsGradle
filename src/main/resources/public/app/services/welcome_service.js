@@ -6,7 +6,7 @@
  */
 
 App.factory("WelcomeService", ["$resource", function($resource)	{
-		    return $resource("/welcome", {}, {
+		    return $resource("/", {}, {
 		    	query  : {  
 		            method  : "GET",
 		            isArray : true

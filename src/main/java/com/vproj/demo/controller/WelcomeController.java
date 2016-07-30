@@ -26,7 +26,7 @@ public class WelcomeController {
      
     //-------------------Retrieve All Menu Items--------------------------------------------------------
      
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<MenuItem>> fetchAllMenuItems() {
         List<MenuItem> menuItems = welcomeService.fetchAllMenuItems();

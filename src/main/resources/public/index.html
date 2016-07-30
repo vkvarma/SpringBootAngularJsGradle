@@ -6,9 +6,27 @@
 		<link rel="stylesheet"	href="app/bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet"	href="app/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 		<link rel="stylesheet"	href="app/css/app.css">
-		
-		<!-- Vendor Libs -->
-		
+	</head>
+
+	<body class="container">
+
+	<div class="generic-container">
+		<div class="panel panel-default">
+			<h3 style="margin-left: 10px">User System</h3>
+			<nav style="margin-left: 10px; margin-right: 12px;"
+				class="navbar navbar-default row">
+				<ul ng-controller="WelcomeController" class="nav navbar-nav">
+					<li ng-repeat="menuItem in menuItems">
+					<a style="text-decoration: none" href="#{{menuItem.menuSref}}">{{menuItem.menuItemName}}</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div ng-view></div>
+	</div>
+
+	<!-- Vendor Libs -->
+			
 		<script src="app/bower_components/angular/angular.js"></script>
 		<script src="app/bower_components/angular-route/angular-route.min.js"></script>
 		<script src="app/bower_components/angular-resource/angular-resource.js"></script>
@@ -22,27 +40,12 @@
 		<!-- App Libs -->
 		
 		<script src="app/app.js"></script>
-		<script src="app/routes.js"></script>
+		<script src="app/routes.js"></script>	
+		<script src="app/controllers/welcome_controller.js"></script>
+		<script src="app/services/welcome_service.js"></script>
 		<script src="app/controllers/user_controller.js"></script>
 		<script src="app/services/user_service.js"></script>
 		<script src="app/controllers/login_controller.js"></script>
 		<script src="app/services/login_service.js"></script>
-	
-	</head>
-
-<body class="container">
-	<div class="generic-container">
-		<div class="panel panel-default">
-			<h3 style="margin-left: 10px">User System</h3>
-			<nav style="margin-left: 10px; margin-right: 12px;"	class="navbar navbar-default row">
-				<ul class="nav navbar-nav">
-					<li><a style="text-decoration: none; float: left" href="#user">User</a>
-						<a style="text-decoration: none; float: left" href="#login">Login</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-		<div ng-view></div>
-	</div>
-</body>
+	</body>
 </html>
