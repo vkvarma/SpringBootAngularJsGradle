@@ -5,7 +5,7 @@
  * @author vivek krishna varma
  */
 
-var App = angular.module("xrs",	[
-    "ngResource",
+var	App	=	angular.module("xrs",	[
+	"ngResource",
 	"ngRoute"
 ]);

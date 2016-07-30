@@ -5,19 +5,20 @@
  * @author vivek krishna varma
  */
 
-App.factory("WelcomeService", ["$resource", function($resource)	{
-		    return $resource("/", {}, {
-		    	query  : {  
-		            method  : "GET",
-		            isArray : true
-		    	}
-		    },
-		    {
-		        stripTrailingSlashes: false
-		    }
-		    );
-	  }
-]);
+App.factory("MenuItemService", ["config", "$resource", function(config, $resource)	{
+	return $resource(config.HOME_URL, 
+	{},
+	{
+			getMenuItems	:	{
+				method	:"GET",
+				isArray	:true
+			}
+		},
+		{
+			stripTrailingSlashes: false
+		}
+	);
+}]);
 
 //App.factory('WelcomeService', ['$http', '$q', function ($http, $q) {
 //    return {

@@ -5,57 +5,36 @@
  * @author vivek krishna varma
  */
 	
-App.factory("UserService", ["$resource", function($resource) {
-    return $resource("/user/:id", {id:"@id"}, {
-    	 get    : {  
-    		 method  : "GET"
-	     },
-	     query  : {  
-	         method  : "GET",
-	         isArray : true
-	     },
-	     save   : {  
-	         method  : "POST"
-	     },                
-	     delete : {  
-	         method  : "DELETE"
-	     },
-	     update : {  
-	         method  : "PUT"
-	     }
-    },
-    {
-        stripTrailingSlashes: false
-    }
-   );
+App.factory("UserService", ["config", "$resource", function(config, $resource) {
+	return $resource(config.USER_BY_ID_SERVICE_URL, 
+		{
+			id:"@id"
+		},
+		{
+			getUserById	:	{
+				method	:"GET"
+			},
+			fetchAllUsers :	{
+				method	:"GET",
+				isArray	:true
+			},
+			saveUser	:	{
+				method	:"POST"
+			},
+			deleteUser	:	{
+				method	:"DELETE"
+			},
+			updateUser	:	{
+				method	:"PUT"
+			}
+		},
+		{
+			stripTrailingSlashes: false
+		}
+	);
 }]);
 
-/*App.factory('UserService', ['$resource', function($resource) { 
-        
-    return $resource('http://localhost:8080/XRS/user/:id', {id:'@id'}, {
-            get    : {  
-                   method  : 'GET'
-            },
-            query  : {  
-                   method  : 'GET',
-                   isArray : true
-            },
-            save   : {  
-                   method  : 'POST'
-            },                
-            delete : {  
-                   method  : 'DELETE'
-            },
-            update : {  
-                   method  : 'PUT'
-            }
-        },
-        {
-            stripTrailingSlashes: false
-        }
-    );
-}]);
-*/
+
 //App.factory('UserService', ['$http', '$q', function ($http, $q) {
 //        return {
 //            fetchAllUsers: function () {

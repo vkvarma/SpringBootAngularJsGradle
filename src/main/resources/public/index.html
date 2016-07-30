@@ -15,7 +15,7 @@
 			<h3 style="margin-left: 10px">User System</h3>
 			<nav style="margin-left: 10px; margin-right: 12px;"
 				class="navbar navbar-default row">
-				<ul ng-controller="WelcomeController" class="nav navbar-nav">
+				<ul ng-controller="MenuItemController" class="nav navbar-nav">
 					<li ng-repeat="menuItem in menuItems">
 					<a style="text-decoration: none" href="#{{menuItem.menuSref}}">{{menuItem.menuItemName}}</a>
 					</li>
@@ -36,13 +36,14 @@
 		<!-- UI Libs -->
 		
 		<script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		
+
 		<!-- App Libs -->
-		
+
 		<script src="app/app.js"></script>
+		<script src="app/config.js"></script>
 		<script src="app/routes.js"></script>	
-		<script src="app/controllers/welcome_controller.js"></script>
-		<script src="app/services/welcome_service.js"></script>
+		<script src="app/controllers/menuitem_controller.js"></script>
+		<script src="app/services/menuitem_service.js"></script>
 		<script src="app/controllers/user_controller.js"></script>
 		<script src="app/services/user_service.js"></script>
 		<script src="app/controllers/login_controller.js"></script>

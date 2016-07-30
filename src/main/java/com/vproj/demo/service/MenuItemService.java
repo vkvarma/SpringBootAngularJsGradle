@@ -9,7 +9,7 @@ import com.vproj.demo.model.MenuItem;
  * @author vivek krishna varma
  */
 
-public interface WelcomeService {
+public interface MenuItemService {
     
    List<MenuItem> fetchAllMenuItems(); 
    

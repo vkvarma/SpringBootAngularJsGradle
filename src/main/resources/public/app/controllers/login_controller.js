@@ -10,7 +10,7 @@ App.controller("LoginController", ["$scope","LoginService",	function($scope, Log
 	$scope.login = new LoginService;
 
 	$scope.getLoginScreen = function() {
-		$scope.login = LoginService.get();
+		$scope.login = LoginService.getLoginScreen();
 	};
 
 	$scope.submit = function() {
@@ -24,7 +24,7 @@ App.controller("LoginController", ["$scope","LoginService",	function($scope, Log
 	};
 
 	$scope.validateLogin = function() {
-		$scope.login.$save(function() {});
+		$scope.login.$validateLogin(function() {});
 	};
 
 	$scope.reset = function() {
@@ -34,9 +34,3 @@ App.controller("LoginController", ["$scope","LoginService",	function($scope, Log
 
 	$scope.getLoginScreen();
 }]);
-
-/*
- * App.controller('LoginController', ['async', function(async) {
- * 
- * var self = this; self.login = async; }]);
- */

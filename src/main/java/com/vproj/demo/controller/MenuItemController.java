@@ -1,7 +1,7 @@
 package com.vproj.demo.controller;
 
 import com.vproj.demo.model.MenuItem;
-import com.vproj.demo.service.WelcomeService;
+import com.vproj.demo.service.MenuItemService;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import java.util.List;
@@ -19,17 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class WelcomeController {
+public class MenuItemController {
     
     @Autowired
-    WelcomeService welcomeService;  
+    MenuItemService menuItemService;  
      
     //-------------------Retrieve All Menu Items--------------------------------------------------------
      
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<MenuItem>> fetchAllMenuItems() {
-        List<MenuItem> menuItems = welcomeService.fetchAllMenuItems();
+        List<MenuItem> menuItems = menuItemService.fetchAllMenuItems();
         if(menuItems == null || menuItems.isEmpty())	{
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

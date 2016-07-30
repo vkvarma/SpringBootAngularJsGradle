@@ -8,29 +8,29 @@
 App.controller("UserController", ["$scope","UserService", function($scope, UserService) {
 
 	$scope.user = new UserService();
-	$scope.users = UserService.query();
+	$scope.users = UserService.fetchAllUsers();
 	
 	$scope.fetchAllUsers = function() {
-		$scope.users = UserService.query();
+		$scope.users = UserService.fetchAllUsers();
 	};
 	
 	$scope.createUser = function() {
-		$scope.user.$save(function() {
+		$scope.user.$saveUser(function() {
 			$scope.fetchAllUsers();
 		});
 	};
 	
 	$scope.updateUser = function() {
-		$scope.user.$update(function() {
+		$scope.user.$updateUser(function() {
 			$scope.fetchAllUsers();
 		});
 	};
 	
 	$scope.deleteUser = function(identity) {
-		var user = UserService.get({
+		var user = UserService.getUserById({
 			id : identity
 		}, function() {
-			user.$delete(function() {
+			user.$deleteUser(function() {
 				console.log("Deleting user with id ", identity);
 				$scope.fetchAllUsers();
 			});
