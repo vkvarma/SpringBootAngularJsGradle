@@ -2,10 +2,11 @@
 .gradle/
 .project
 .springBeans
+.idea
 .settings/
 /bin/
 /gradle/
 /build/
 /node_modules/
-/src/main/resources/public/bower_components/
+/src/main/resources/public/app/bower_components/
 *~
