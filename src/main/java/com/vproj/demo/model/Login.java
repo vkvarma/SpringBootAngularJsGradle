@@ -7,7 +7,6 @@ package com.vproj.demo.model;
 
 public class Login {
     
-    private long   id;
     private String sessionId;
     private String username;
     private String password;
@@ -16,27 +15,12 @@ public class Login {
         
     }
     
-    public Login(long id,String sessionId, String username, String password) {
-        this.id        = id;
+    public Login(String sessionId, String username, String password) {
         this.sessionId = sessionId;
         this.username  = username;
         this.password  = password;
     }    
     
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
-
     /**
      * @return the username
      */

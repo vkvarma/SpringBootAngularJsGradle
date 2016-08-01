@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author vivek krishna varma
  */
 
-@Service("welcomeService")
+@Service("menuItemService")
 @Transactional
 public class MenuItemServiceImpl implements MenuItemService {
     
@@ -30,7 +30,6 @@ public class MenuItemServiceImpl implements MenuItemService {
     private static List<MenuItem> populateDummyItems() {
         List<MenuItem> dummyMenuItems = new ArrayList<>();
         dummyMenuItems.add(new MenuItem(1,"User","user"));
-        dummyMenuItems.add(new MenuItem(2,"Login","login"));
         return dummyMenuItems;
     }    
 }

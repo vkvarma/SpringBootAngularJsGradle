@@ -26,7 +26,7 @@ public class MenuItemController {
      
     //-------------------Retrieve All Menu Items--------------------------------------------------------
      
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/home", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<MenuItem>> fetchAllMenuItems() {
         List<MenuItem> menuItems = menuItemService.fetchAllMenuItems();
