@@ -5,11 +5,12 @@
  * @author vivek krishna varma
  */
 
-App.controller("LoginController", ["$scope","$location","config","LoginService",	function($scope, $location, config, LoginService) {
+App.controller("LoginController", ["$scope","$rootScope","$location","config","LoginService",	function($scope, $rootScope, $location, config, LoginService) {
 
 	$scope.login = {
 			username: "",
-			password: ""
+			password: "",
+			authenticated:false
 	};
 
 	$scope.doLogin = function () {
@@ -17,6 +18,7 @@ App.controller("LoginController", ["$scope","$location","config","LoginService",
 		LoginService.doLogin($scope.login.username, $scope.login.password, function (data, status, headers) {
 			// Success handler
 			console.info('The user has been successfully logged in! ', data, status, headers);
+			$rootScope.authenticated = data;
 			$location.path(config.HOME_URL);
 		}, 
 		function(data, status, headers, config) {
@@ -28,7 +30,6 @@ App.controller("LoginController", ["$scope","$location","config","LoginService",
 	$scope.submit = function() {
 		if ($scope.login.username != null	&& $scope.login.password != null) {
 			console.log("validating login", $scope.login);
-			//$scope.validateLogin();
 			$scope.doLogin();
 		} 
 		else {

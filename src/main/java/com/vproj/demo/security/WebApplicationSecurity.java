@@ -1,10 +1,7 @@
 package com.vproj.demo.security;
 
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
@@ -14,10 +11,6 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import org.springframework.security.web.util.matcher.AndRequestMatcher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
-
 import com.vproj.demo.filter.CORSFilter;
 
 import javax.annotation.Resource;
@@ -87,19 +80,6 @@ public class WebApplicationSecurity extends WebSecurityConfigurerAdapter {
             .addFilterBefore(corsFilter, ChannelProcessingFilter.class)            
             .csrf()
                 .csrfTokenRepository(csrfTokenRepository())
-//            .requireCsrfProtectionMatcher(
-//    			new AndRequestMatcher(
-//    				// Apply CSRF protection to all paths that do NOT match the ones below        				
-//    				new NegatedRequestMatcher(new AntPathRequestMatcher("/login*/**", HttpMethod.OPTIONS.toString())),
-//    				new NegatedRequestMatcher(new AntPathRequestMatcher("/logout*/**", HttpMethod.OPTIONS.toString())),
-//    				new NegatedRequestMatcher(new AntPathRequestMatcher("/user*/**", HttpMethod.GET.toString())),
-//    				new NegatedRequestMatcher(new AntPathRequestMatcher("/user*/**", HttpMethod.HEAD.toString())),
-//    				new NegatedRequestMatcher(new AntPathRequestMatcher("/user*/**", HttpMethod.OPTIONS.toString())),
-//    				new NegatedRequestMatcher(new AntPathRequestMatcher("/*/**", HttpMethod.GET.toString())),
-//    				new NegatedRequestMatcher(new AntPathRequestMatcher("/*/**", HttpMethod.HEAD.toString())),
-//    				new NegatedRequestMatcher(new AntPathRequestMatcher("/*/**", HttpMethod.OPTIONS.toString()))
-//        			)
-//        	)
             .and()
                 .addFilterAfter(new CsrfTokenResponseCookieBindingFilter(), CsrfFilter.class);
 	}

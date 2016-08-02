@@ -5,25 +5,6 @@
  * @author vivek krishna varma
  */
 
-/*App.factory("LoginService", ["config",	"$resource", function(config, $resource) { 
-	return $resource(config.LOGIN_BY_AUTH_SERVICE_URL,
-		{
-			username:"@username",
-			password:"@password"
-		},
-		{
-			getLoginScreen	:	{
-				method	:"GET"
-			},
-			validateLogin	:	{
-				method	: "POST"
-			}
-		},
-		{
-			stripTrailingSlashes: false
-		});
-}]);*/
-
 "use strict";
 
 /**
@@ -31,7 +12,7 @@
  * @author vivek krishna varma
  */
 
-App.factory("LoginService", ["config",	"$resource", "$http", "Cookies", function(config, $resource, $http, Cookies) { 
+App.factory("LoginService", ["config",	"$resource", "$http", "Cookies", "DemoUtil", function(config, $resource, $http, Cookies ,DemoUtil) { 
 	
 	var loginResources = $resource(config.LOGIN_SERVICE_URL, {}, {
 		options: {
@@ -70,10 +51,12 @@ App.factory("LoginService", ["config",	"$resource", "$http", "Cookies", function
 	
 				// Post the credentials for logging in
 				
+				console.log("DemoUtil.isNotNull(csrfToken)  = "+DemoUtil.isNotNull(csrfToken));
 				var loginObj = {
-						username : username,
-						password : password,
-						sessionId : csrfToken
+						username        : username,
+						password        : password,
+						sessionId       : csrfToken,
+						authenticated   : DemoUtil.isNotNull(csrfToken) 
 				};
 				
 				$http.post(config.SIGN_IN_SERVICE_URL, loginObj, {

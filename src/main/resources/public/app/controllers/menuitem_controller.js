@@ -6,7 +6,17 @@
  */
 
 App.controller("MenuItemController", ["$scope","MenuItemService",	function($scope, MenuItemService) {
-	$scope.menuItems = MenuItemService.getMenuItems();
+	
+	$scope.menuItems = MenuItemService.getMenuItems();	
+	$scope.tab = "user";
+
+	$scope.setTab = function(tab) {
+		$scope.tab = tab;
+    };
+
+    $scope.isSet = function(tab) {
+      return ($scope.tab === tab);
+    };
 }]);
 
 //    self.fetchAllMenuItems = function () {

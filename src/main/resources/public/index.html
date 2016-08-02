@@ -14,9 +14,12 @@
 
 	<body class="container">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <div ng-view></div>
     
-
+    
+    <div ng-show="authenticated" ng-include="'views/menuitems.html'"></div> 
+    
+    <div ng-view></div>   
+    
 	
 	<!-- Vendor Libs -->
 			
@@ -33,6 +36,7 @@
 		<!-- App Libs -->
 
 		<script src="app/app.js"></script>
+		<script src="app/services/utils_service.js"></script>
 		<script src="app/config.js"></script>
 		<script src="app/routes.js"></script>	
 		<script src="app/services/cookies-service.js"></script>

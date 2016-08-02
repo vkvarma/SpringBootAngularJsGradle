@@ -10,8 +10,9 @@ public class Login {
     private String sessionId;
     private String username;
     private String password;
+    private boolean authenticated;
 
-    public Login() {
+	public Login() {
         
     }
     
@@ -62,4 +63,12 @@ public class Login {
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
+
+	public boolean isAuthenticated() {
+		return authenticated;
+	}
+
+	public void setAuthenticated(boolean authenticated) {
+		this.authenticated = authenticated;
+	}
 }

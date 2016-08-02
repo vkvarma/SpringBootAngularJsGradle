@@ -18,7 +18,7 @@ public class MenuItemServiceImpl implements MenuItemService {
     
     private static List<MenuItem> menuItems;
 
-    static {
+    static { 
             menuItems = populateDummyItems();
     }
 
@@ -30,6 +30,7 @@ public class MenuItemServiceImpl implements MenuItemService {
     private static List<MenuItem> populateDummyItems() {
         List<MenuItem> dummyMenuItems = new ArrayList<>();
         dummyMenuItems.add(new MenuItem(1,"User","user"));
+        dummyMenuItems.add(new MenuItem(2,"Logout","logout")); 
         return dummyMenuItems;
     }    
 }
