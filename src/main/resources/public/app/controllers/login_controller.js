@@ -27,6 +27,20 @@ App.controller("LoginController", ["$scope","$rootScope","$location","config","L
 		});
 	};
 	
+	$scope.doLogout = function () {
+		console.log("processing doLogin() ");
+		LoginService.doLogout(function () {
+			// Success handler
+			console.info('The user has been successfully logged out ! ');
+			$rootScope.authenticated = false;
+			$location.path(config.CONTEXT_URL);
+		}, 
+		function(data, status, headers, config) {
+			// Failure handler
+			console.error('Something went wrong while trying to login... ', data, status, headers);
+		});
+	};
+	
 	$scope.submit = function() {
 		if ($scope.login.username != null	&& $scope.login.password != null) {
 			console.log("validating login", $scope.login);

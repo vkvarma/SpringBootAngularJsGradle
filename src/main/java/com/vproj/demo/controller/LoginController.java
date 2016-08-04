@@ -29,11 +29,16 @@ public class LoginController {
     //-------------------Validate candidates login--------------------------------------------------------
    
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<Boolean> validate(@RequestBody Login login ) {
+    public @ResponseBody ResponseEntity<Boolean> validateLogin(@RequestBody Login login ) {
         //boolean loginSuccess = loginService.validateLogin(login.getUsername(), login.getPassword());
     	
     	//String str = SecurityContextHolder.getContext().getAuthentication().getName(); 
     			
         return new ResponseEntity<>(login.isAuthenticated(), HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity<Void> doLogout() {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

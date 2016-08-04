@@ -1,12 +1,14 @@
-<div class="generic-container">
+<div ng-controller="MenuItemController"  class="generic-container">
 		<div class="panel panel-default">
-			<h3 style="margin-left: 10px">User System</h3>
+		<a ng-show="authenticated" ng-click="doLogout()">logout</a>
+			<h3 style="margin-left: 10px">XRS</h3>
 			<nav style="margin-left: 10px; margin-right: 12px;"
 				class="navbar navbar-default row">
-				<ul ng-controller="MenuItemController" class="nav navbar-nav">
+				<ul class="nav navbar-nav">
 					<li ng-class="{active:isSet(menuItem.menuSref)}" ng-repeat="menuItem in menuItems">
 						<a ng-click="setTab(menuItem.menuSref)" style="text-decoration: none" href="#{{menuItem.menuSref}}">{{menuItem.menuItemName}}</a>
 					</li>
+					
 				</ul>
 			</nav>
 		</div>		

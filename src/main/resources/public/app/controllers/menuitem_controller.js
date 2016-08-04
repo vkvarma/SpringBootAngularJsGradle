@@ -5,10 +5,13 @@
  * @author vivek krishna varma
  */
 
-App.controller("MenuItemController", ["$scope","MenuItemService",	function($scope, MenuItemService) {
+App.controller("MenuItemController", ["$scope","MenuItemService","$controller",	function($scope, MenuItemService, $controller) {
 	
-	$scope.menuItems = MenuItemService.getMenuItems();	
-	$scope.tab = "user";
+	$scope.tab 		 = "";
+		
+	this.getAllMenuItems = function() {		
+		return MenuItemService.getMenuItems();		
+	}
 
 	$scope.setTab = function(tab) {
 		$scope.tab = tab;
@@ -17,6 +20,15 @@ App.controller("MenuItemController", ["$scope","MenuItemService",	function($scop
     $scope.isSet = function(tab) {
       return ($scope.tab === tab);
     };
+    
+    $scope.doLogout = function() {
+    	var loginCtrl = $scope.$new();
+    	console.log("calling menu for logout");
+    	$controller('LoginController',{$scope : loginCtrl});
+    	loginCtrl.doLogout();
+    }
+    
+    $scope.menuItems = this.getAllMenuItems();
 }]);
 
 //    self.fetchAllMenuItems = function () {

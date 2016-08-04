@@ -19,14 +19,7 @@ App.factory("LoginService", ["config",	"$resource", "$http", "Cookies", "DemoUti
 			method: "OPTIONS",
 			cache: false
 		}
-	});
-
-	var logoutResources = $resource(config.LOGIN_SERVICE_URL, {}, {
-		options: {
-			method: "OPTIONS",
-			cache: false
-		}
-	});
+	});	
 	
 	var isCSRFTokenInvalidOrMissing = function (data, status) {
 		return (status === 403 && data.message && data.message.toLowerCase().indexOf('csrf') > -1) || (status === 0 && data === null);
@@ -77,6 +70,32 @@ App.factory("LoginService", ["config",	"$resource", "$http", "Cookies", "DemoUti
 			catch(function(response) {
 				console.error("Could not contact the server...", response);
 			});
-		}	
+		},
+		doLogout : function(successHandler, errorHandler) {
+			
+			// Extract the CSRF token
+			var csrfToken = Cookies.getFromDocument($http.defaults.xsrfCookieName);
+			console.log('Extracted the CSRF token from the cookie', csrfToken);
+
+			// Prepare the headers
+			var headers = {
+				'Content-Type': 'application/json'
+			};
+			headers[$http.defaults.xsrfHeaderName] = csrfToken;
+			
+			$http.post(config.LOGOUT_SERVICE_URL, {
+				headers: headers
+			}).success(successHandler)	
+			  .error(function (data, status, headers, config) {
+
+					if (isCSRFTokenInvalidOrMissing(data, status)) {
+						console.error('The obtained CSRF token was either missing or invalid. Have you turned on your cookies?');
+
+					} else {
+						// error handler...
+						errorHandler(data, status, headers, config);
+					}
+				});
+		}		
 	 }
 }]);

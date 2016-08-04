@@ -6,43 +6,46 @@
  */
 
 App.controller("UserController", ["$scope","UserService", function($scope, UserService) {
-
-	$scope.user = new UserService();
-	$scope.users = UserService.fetchAllUsers();
 	
-	$scope.fetchAllUsers = function() {
+	$scope.user	 = new UserService();
+	$scope.users = [];
+	fetchAllUsers();
+	
+	function fetchAllUsers() {
 		$scope.users = UserService.fetchAllUsers();
-	};
+	}
 	
 	$scope.createUser = function() {
 		$scope.user.$saveUser(function() {
-			$scope.fetchAllUsers();
+			fetchAllUsers();
 		});
 	};
 	
 	$scope.updateUser = function() {
 		$scope.user.$updateUser(function() {
-			$scope.fetchAllUsers();
+			fetchAllUsers();
 		});
 	};
 	
 	$scope.deleteUser = function(identity) {
 		var user = UserService.getUserById({
 			id : identity
-		}, function() {
+		}, 
+		function() {
 			user.$deleteUser(function() {
 				console.log("Deleting user with id ", identity);
-				$scope.fetchAllUsers();
+				fetchAllUsers();
 			});
 		});
 	};
 	
 	$scope.submit = function() {
-	
+		
 		if ($scope.user.id == null) {
 			console.log("Saving New User", $scope.user);
 			$scope.createUser();
-		} else {
+		} 
+		else {
 			console.log("Upddating user with id ", $scope.user.id);
 			$scope.updateUser();
 			console.log("User updated with id ", $scope.user.id);
@@ -52,15 +55,16 @@ App.controller("UserController", ["$scope","UserService", function($scope, UserS
 	
 	$scope.edit = function(id) {
 		console.log("id to be edited", id);
-		for (var i = 0; i < $scope.users.length; i++) {
-			if ($scope.users[i].id === id) {
-				$scope.user = angular.copy($scope.users[i]);
-				break;
+		
+		angular.forEach($scope.users, function(value) {
+			if (value.id === id) {
+				$scope.user = angular.copy(value);
+				return false;
 			}
-		}
+		});
 	};
 	
-	$scope.remove = function(id) {
+	$scope.remove = function(id) {		
 		console.log("id to be deleted", id);
 		if ($scope.user.id === id) {
 			$scope.reset();
