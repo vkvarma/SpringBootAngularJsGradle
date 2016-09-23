@@ -6,7 +6,7 @@ apply plugin: "jacoco"
 apply plugin: 'war'
 apply plugin: 'io.github.robwin.jgitflow'
 
-println "Building " + group + " : " + project.name + " : " + version
+println "Building    " + group + " : " + project.name + " : " + version
 
 buildscript	{
 	ext	{
@@ -14,10 +14,8 @@ buildscript	{
 		springCloudVersion		=	'1.0.2.RELEASE'
 		springFrameworkVersion	=	'4.2.5.RELEASE'
 	}
-	repositories {
-		//mavenLocal()
-		mavenCentral()
-		//maven { url "https://maven.teamccp.com/content/repositories/" }
+	repositories {		
+		mavenCentral()		
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootGradleVersion}")
