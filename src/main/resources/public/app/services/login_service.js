@@ -5,13 +5,6 @@
  * @author vivek krishna varma
  */
 
-"use strict";
-
-/**
- *
- * @author vivek krishna varma
- */
-
 App.factory("LoginService", ["config",	"$resource", "$http", "Cookies", "DemoUtil", function(config, $resource, $http, Cookies ,DemoUtil) { 
 	
 	var loginResources = $resource(config.LOGIN_SERVICE_URL, {}, {
